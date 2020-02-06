@@ -16,6 +16,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.add_contact_activity.*
 import kotlinx.android.synthetic.main.progress_loading.*
+import android.app.Activity
+import android.content.Intent
+
+
 
 class AddContactActivity : AppCompatActivity() {
     private lateinit var dataContact: Datum
@@ -75,9 +79,13 @@ class AddContactActivity : AppCompatActivity() {
     private val getAddContactMessage = Observer<String> { contactMessage ->
         if (contactMessage != null) {
             idLoading.visibility = View.GONE
-            if (contactMessage == "contact saved") {
+            if (contactMessage == getString(R.string.info_success_add_contact_message)) {
                 Toast.makeText(applicationContext, getString(R.string.info_success_add_contact), Toast.LENGTH_LONG).show()
             }
+            val returnIntent = Intent()
+            returnIntent.putExtra("result", contactMessage)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
 
         } else {
             idLoading.visibility = View.GONE

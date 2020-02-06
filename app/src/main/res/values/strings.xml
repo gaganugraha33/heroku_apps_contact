@@ -11,4 +11,5 @@
     <string name="photo_info_error">please fill field photo</string>
     <string name="info_success_add_contact">Success Add Contact</string>
     <string name="info_error_response">There is an error, wait or please try again</string>
+    <string name="info_success_add_contact_message">contact saved</string>
 </resources>
