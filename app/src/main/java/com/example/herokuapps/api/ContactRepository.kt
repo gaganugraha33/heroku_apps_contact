@@ -18,4 +18,12 @@ class ContactRepository(private val contactService: ContactService) {
     fun addContact(datum: Datum):Observable<MessageModel>{
         return contactService.addContact(datum)
     }
+
+    fun editContact(datum: Datum, id:String):Observable<ContactModelById>{
+        return contactService.editContact(datum, id)
+    }
+
+    fun deleteContact(id:String):Observable<MessageModel>{
+        return contactService.deleteContact(id)
+    }
 }
