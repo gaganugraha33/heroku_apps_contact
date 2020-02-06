@@ -1,7 +1,4 @@
 package com.example.herokuapps.ContactViewModel
-
-import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.herokuapps.api.ContactRepository
 import com.example.herokuapps.model.contactmodel.Datum
 import com.example.herokuapps.model.contactmodelbyid.Data
-import com.example.herokuapps.model.messagemodel.MessageModel
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 
