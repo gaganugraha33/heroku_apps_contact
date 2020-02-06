@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Heroku Apps</string>
+    <string name="name_user">Name user</string>
+    <string name="age_user">Age user</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="terjadi_kesalahan_coba_ulangi_lagi">Terjadi kesalahan, coba ulangi lagi</string>
+    <string name="image_for_content_error">image for content error</string>
+    <string name="firstname_info_error">please fill field firstname</string>
+    <string name="lastname_info_error">please fill field lastname</string>
+    <string name="age_info_error">please fill field age</string>
+    <string name="photo_info_error">please fill field photo</string>
+    <string name="info_success_add_contact">Success Add Contact</string>
+    <string name="info_error_response">There is an error, wait or please try again</string>
+</resources>
