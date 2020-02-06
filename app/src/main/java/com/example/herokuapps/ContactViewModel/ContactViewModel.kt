@@ -64,6 +64,21 @@ class ContactViewModel(
         )
     }
 
+    fun editContact(dataContact: Datum, id:String) {
+        compositeDisposable.add(
+            repository.editContact(dataContact, id)
+                .observeOn(backgroundScheduler)
+                .subscribeOn(mainScheduler)
+                .subscribe({
+                    messageAddContact.postValue(it.message)
+                }, { error ->
+                    messageAddContact.postValue(null)
+                    println("error message " + error.message)
+                }
+                )
+        )
+    }
+
     fun getListContact(): LiveData<MutableList<Datum>> {
         return listContact
     }
@@ -72,7 +87,7 @@ class ContactViewModel(
         return contactData
     }
 
-    fun getAddContactMessage(): LiveData<String> {
+    fun getContactMessage(): LiveData<String> {
         return messageAddContact
     }
 

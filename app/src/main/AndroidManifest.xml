@@ -24,11 +24,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity"
-            android:label="Detail Contact"
+            android:label="@string/detail_contact"
             />
 
         <activity android:name=".AddContactActivity"
-            android:label="Add Contact"
+            android:label="@string/add_contact"
+            />
+
+        <activity android:name=".EditContactActivity"
+            android:label="@string/edit_contact"
             />
     </application>
 

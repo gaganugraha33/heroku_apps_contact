@@ -21,7 +21,7 @@ import android.content.Intent
 
 
 
-class AddContactActivity : AppCompatActivity() {
+class EditContactActivity : AppCompatActivity() {
     private lateinit var dataContact: Datum
     private val compositeDisposable = CompositeDisposable()
     private val repository = ContactProvider.contactProviderRepository()
@@ -68,19 +68,19 @@ class AddContactActivity : AppCompatActivity() {
                             Schedulers.io()
                         )
                     ).get(ContactViewModel::class.java)
-                    contactViewModel.addContact(dataContact)
-                    contactViewModel.getContactMessage().observe(this, getAddContactMessage)
+                    contactViewModel.editContact(dataContact, dataContact.id.toString())
+                    contactViewModel.getContactMessage().observe(this, getEditContactMessage)
                 }
             }
 
         })
     }
 
-    private val getAddContactMessage = Observer<String> { contactMessage ->
+    private val getEditContactMessage = Observer<String> { contactMessage ->
         if (contactMessage != null) {
             idLoading.visibility = View.GONE
-            if (contactMessage == getString(R.string.info_success_add_contact_message)) {
-                Toast.makeText(applicationContext, getString(R.string.info_success_add_contact), Toast.LENGTH_LONG).show()
+            if (contactMessage == getString(R.string.contact_edited)) {
+                Toast.makeText(applicationContext, getString(R.string.info_success_edit_contact), Toast.LENGTH_LONG).show()
             }
             val returnIntent = Intent()
             returnIntent.putExtra("result", contactMessage)
