@@ -20,7 +20,6 @@ import android.app.Activity
 import android.content.Intent
 
 
-
 class EditContactActivity : AppCompatActivity() {
     private lateinit var dataContact: Datum
     private val compositeDisposable = CompositeDisposable()
@@ -32,6 +31,14 @@ class EditContactActivity : AppCompatActivity() {
         setContentView(R.layout.add_contact_activity)
         idLoading.visibility = View.GONE
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        dataContact = intent.getSerializableExtra("dataContact") as Datum
+
+        firstname.setText(dataContact.firstName)
+        lastname.setText(dataContact.lastName)
+        age.setText(dataContact.age.toString())
+        urlPhoto.setText(dataContact.photo)
+        submit.setText("Edit Contact")
 
         submit.setOnClickListener(View.OnClickListener {
             when {
@@ -80,7 +87,11 @@ class EditContactActivity : AppCompatActivity() {
         if (contactMessage != null) {
             idLoading.visibility = View.GONE
             if (contactMessage == getString(R.string.contact_edited)) {
-                Toast.makeText(applicationContext, getString(R.string.info_success_edit_contact), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.info_success_edit_contact),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             val returnIntent = Intent()
             returnIntent.putExtra("result", contactMessage)
@@ -89,7 +100,11 @@ class EditContactActivity : AppCompatActivity() {
 
         } else {
             idLoading.visibility = View.GONE
-            Toast.makeText(applicationContext, getString(R.string.info_error_response), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                applicationContext,
+                getString(R.string.info_error_response),
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 

@@ -65,6 +65,7 @@ class ContactViewModel(
     }
 
     fun editContact(dataContact: Datum, id:String) {
+        println("cek browww id"+id+", nama firstname "+dataContact.firstName)
         compositeDisposable.add(
             repository.editContact(dataContact, id)
                 .observeOn(backgroundScheduler)

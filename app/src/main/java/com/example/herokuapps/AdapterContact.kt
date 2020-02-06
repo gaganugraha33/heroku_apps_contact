@@ -2,6 +2,7 @@ package com.example.herokuapps
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.herokuapps.model.contactmodel.Datum
 import com.example.herokuapps.util.Constant
 import kotlinx.android.synthetic.main.adapter_contact_view.view.*
+import java.io.Serializable
 
 class AdapterContact(
     private var listContact: MutableList<Datum?>,
@@ -45,7 +47,7 @@ class AdapterContact(
             listContact[position]?.let { it1 ->
                 (holder as Item).bindItem(
                     it1,
-                    listener
+                    listener, context
                 )
             }
         }
@@ -53,17 +55,29 @@ class AdapterContact(
 
     class Item(itemview: View) : RecyclerView.ViewHolder(itemview) {
         @SuppressLint("CheckResult", "SetTextI18n")
-        fun bindItem(dataContact: Datum, listener: (Datum) -> Unit) {
-            itemView.nameUser.text = dataContact.firstName+" "+dataContact.lastName
+        fun bindItem(dataContact: Datum, listener: (Datum) -> Unit, context: Context?) {
+            itemView.nameUser.text = dataContact.firstName + " " + dataContact.lastName
             itemView.ageUser.text = dataContact.age.toString()
 
             val requestOption = RequestOptions()
             requestOption.placeholder(R.drawable.ic_launcher_background)
             requestOption.error(R.drawable.ic_launcher_background)
-            Glide.with(itemView.profile_image).setDefaultRequestOptions(requestOption).load(dataContact.photo).into(itemView.profile_image)
+            Glide.with(itemView.profile_image).setDefaultRequestOptions(requestOption)
+                .load(dataContact.photo).into(itemView.profile_image)
 
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 listener(dataContact)
+            }
+
+            itemView.edit.setOnClickListener {
+                val intentDetail = Intent(context, EditContactActivity::class.java)
+                intentDetail.putExtra("dataContact", dataContact as Serializable)
+                intentDetail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context?.startActivity(intentDetail)
+            }
+
+            itemView.delete.setOnClickListener {
+                println("cekk delete")
             }
 
         }

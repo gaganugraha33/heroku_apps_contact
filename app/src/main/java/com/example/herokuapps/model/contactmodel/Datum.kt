@@ -2,8 +2,9 @@ package com.example.herokuapps.model.contactmodel
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class Datum {
+class Datum : Serializable {
     @SerializedName("id")
     @Expose
     var id: String? = null
