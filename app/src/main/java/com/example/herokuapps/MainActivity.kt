@@ -20,13 +20,12 @@ import kotlinx.android.synthetic.main.failed_load_layout.*
 import kotlinx.android.synthetic.main.progress_loading.*
 
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var adapterContact: AdapterContact
     private lateinit var contactViewModel: ContactViewModel
     private var dataListContact: MutableList<Datum?> = mutableListOf()
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val RESULT_CODE = 3
+    private val resultCode = 3
     private val compositeDisposable = CompositeDisposable()
     private val repository = ContactProvider.contactProviderRepository()
 
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener(View.OnClickListener {
             val intentAdd = Intent(applicationContext, AddContactActivity::class.java)
-            startActivityForResult(intentAdd, RESULT_CODE)
+            startActivityForResult(intentAdd, resultCode)
         })
 
         adapterContact = AdapterContact(dataListContact, applicationContext) {
@@ -89,7 +88,6 @@ class MainActivity : AppCompatActivity() {
             if (data != null && data.getStringExtra("result") == getString(R.string.info_success_add_contact_message)) {
                 contactViewModel.setListContact()
                 contactViewModel.getListContact().observe(this, getContact)
-
             }
         }
     }
