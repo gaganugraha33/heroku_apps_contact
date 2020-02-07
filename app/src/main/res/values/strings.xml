@@ -16,4 +16,6 @@
     <string name="info_success_edit_contact">Edit Contact Success</string>
     <string name="detail_contact">Detail Contact</string>
     <string name="edit_contact">Edit Contact</string>
+    <string name="name_intent_data_contact">dataContact</string>
+    <string name="intent_id_contact_detail">idContact</string>
 </resources>

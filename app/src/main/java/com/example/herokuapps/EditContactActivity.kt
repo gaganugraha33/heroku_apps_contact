@@ -1,5 +1,6 @@
 package com.example.herokuapps
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -25,20 +26,23 @@ class EditContactActivity : AppCompatActivity() {
     private val compositeDisposable = CompositeDisposable()
     private val repository = ContactProvider.contactProviderRepository()
     private lateinit var contactViewModel: ContactViewModel
+    private var idContact = ""
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_contact_activity)
         idLoading.visibility = View.GONE
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        dataContact = intent.getSerializableExtra("dataContact") as Datum
+        dataContact = intent.getSerializableExtra(getString(R.string.name_intent_data_contact)) as Datum
 
         firstname.setText(dataContact.firstName)
         lastname.setText(dataContact.lastName)
         age.setText(dataContact.age.toString())
         urlPhoto.setText(dataContact.photo)
-        submit.setText("Edit Contact")
+        idContact = dataContact.id.toString()
+        submit.setText(getString(R.string.edit_contact))
 
         submit.setOnClickListener(View.OnClickListener {
             when {
@@ -75,7 +79,7 @@ class EditContactActivity : AppCompatActivity() {
                             Schedulers.io()
                         )
                     ).get(ContactViewModel::class.java)
-                    contactViewModel.editContact(dataContact, dataContact.id.toString())
+                    contactViewModel.editContact(dataContact, idContact)
                     contactViewModel.getContactMessage().observe(this, getEditContactMessage)
                 }
             }
@@ -93,8 +97,9 @@ class EditContactActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+            println("cekk message "+contactMessage)
             val returnIntent = Intent()
-            returnIntent.putExtra("result", contactMessage)
+            returnIntent.putExtra("resultEdit", contactMessage)
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
 

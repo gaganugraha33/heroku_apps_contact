@@ -20,6 +20,7 @@ class ContactRepository(private val contactService: ContactService) {
     }
 
     fun editContact(datum: Datum, id:String):Observable<ContactModelById>{
+        println("cekk isi idnya mana bor "+id)
         return contactService.editContact(datum, id)
     }
 

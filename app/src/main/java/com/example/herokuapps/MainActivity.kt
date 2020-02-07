@@ -18,14 +18,17 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.failed_load_layout.*
 import kotlinx.android.synthetic.main.progress_loading.*
+import java.io.Serializable
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ListenerContact {
+
     private lateinit var adapterContact: AdapterContact
     private lateinit var contactViewModel: ContactViewModel
     private var dataListContact: MutableList<Datum?> = mutableListOf()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private val resultCode = 3
+    private val resultCodeEdit = 4
     private val compositeDisposable = CompositeDisposable()
     private val repository = ContactProvider.contactProviderRepository()
 
@@ -35,14 +38,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         idError.visibility = View.GONE
 
-        fab.setOnClickListener(View.OnClickListener {
+        fab.setOnClickListener {
             val intentAdd = Intent(applicationContext, AddContactActivity::class.java)
             startActivityForResult(intentAdd, resultCode)
-        })
+        }
 
-        adapterContact = AdapterContact(dataListContact, applicationContext) {
+        adapterContact = AdapterContact(dataListContact, applicationContext, this) {
             val intentDetail = Intent(applicationContext, DetailActivity::class.java)
-            intentDetail.putExtra("idContact", it.id)
+            intentDetail.putExtra(getString(R.string.intent_id_contact_detail), it.id)
             startActivity(intentDetail)
         }
 
@@ -76,16 +79,32 @@ class MainActivity : AppCompatActivity() {
                 adapterContact.addData(datalistMovieNew)
             }
         } else {
+            mainView.visibility = View.GONE
             idLoading.visibility = View.GONE
             idError.visibility = View.VISIBLE
         }
     }
 
+    override fun listenerEdit(dataContact: Datum) {
+        val intentEdit = Intent(this, EditContactActivity::class.java)
+        intentEdit.putExtra(
+            getString(R.string.name_intent_data_contact),
+            dataContact as Serializable
+        )
+        startActivityForResult(intentEdit, resultCodeEdit)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+
         if (resultCode == Activity.RESULT_OK) {
             if (data != null && data.getStringExtra("result") == getString(R.string.info_success_add_contact_message)) {
+                idLoading.visibility = View.VISIBLE
+                contactViewModel.setListContact()
+                contactViewModel.getListContact().observe(this, getContact)
+            } else if (data != null && data.getStringExtra("resultEdit") == getString(R.string.contact_edited)) {
+                idLoading.visibility = View.VISIBLE
                 contactViewModel.setListContact()
                 contactViewModel.getListContact().observe(this, getContact)
             }

@@ -42,7 +42,7 @@ class DetailActivity : AppCompatActivity() {
                 Schedulers.io()
             )
         ).get(ContactViewModel::class.java)
-        contactViewModel.setListContactById(intent.getStringExtra("idContact"))
+        contactViewModel.setListContactById(intent.getStringExtra(getString(R.string.intent_id_contact_detail)))
         contactViewModel.getContactById().observe(this, getContactById)
 
     }
