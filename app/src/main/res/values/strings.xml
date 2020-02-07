@@ -3,7 +3,6 @@
     <string name="name_user">Name user</string>
     <string name="age_user">Age user</string>
     <string name="add_contact">Add Contact</string>
-    <string name="terjadi_kesalahan_coba_ulangi_lagi">Terjadi kesalahan, coba ulangi lagi</string>
     <string name="image_for_content_error">image for content error</string>
     <string name="firstname_info_error">please fill field firstname</string>
     <string name="lastname_info_error">please fill field lastname</string>
@@ -11,11 +10,24 @@
     <string name="photo_info_error">please fill field photo</string>
     <string name="info_success_add_contact">Success Add Contact</string>
     <string name="info_error_response">There is an error, wait or please try again</string>
+    <string name="info_delete_contact_success">Delete contact Success</string>
     <string name="info_success_add_contact_message">contact saved</string>
     <string name="contact_edited">Contact edited</string>
+    <string name="contact_deleted">contact deleted</string>
     <string name="info_success_edit_contact">Edit Contact Success</string>
     <string name="detail_contact">Detail Contact</string>
     <string name="edit_contact">Edit Contact</string>
     <string name="name_intent_data_contact">dataContact</string>
     <string name="intent_id_contact_detail">idContact</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="title_dialog">Are you sure you want delete contact?</string>
+    <string name="desc_dialog">contact will delete permanently</string>
+    <string name="button_for_edit_contact">button for edit contact</string>
+    <string name="button_for_delete_contact">button for delete contact</string>
+    <string name="firstname">firstname</string>
+    <string name="lastname">lastname</string>
+    <string name="age">age</string>
+    <string name="url_photo">url photo</string>
+    <string name="submit">Submit</string>
 </resources>

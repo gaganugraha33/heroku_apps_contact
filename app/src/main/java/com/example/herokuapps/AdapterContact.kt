@@ -73,7 +73,7 @@ class AdapterContact(
             }
 
             itemView.delete.setOnClickListener {
-                println("cekk delete")
+               listenerContact.listenerDelete(dataContact.id.toString())
             }
 
         }

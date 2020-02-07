@@ -48,14 +48,16 @@
                     android:id="@+id/edit"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/ic_pencil" />
+                    android:src="@drawable/ic_pencil"
+                    android:contentDescription="@string/button_for_edit_contact" />
 
                 <ImageView
                     android:id="@+id/delete"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_cancel" />
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_cancel"
+                    android:contentDescription="@string/button_for_delete_contact" />
 
             </LinearLayout>
 

@@ -65,9 +65,23 @@ class ContactViewModel(
     }
 
     fun editContact(dataContact: Datum, id:String) {
-        println("cek browww id"+id+", nama firstname "+dataContact.firstName)
         compositeDisposable.add(
             repository.editContact(dataContact, id)
+                .observeOn(backgroundScheduler)
+                .subscribeOn(mainScheduler)
+                .subscribe({
+                    messageAddContact.postValue(it.message)
+                }, { error ->
+                    messageAddContact.postValue(null)
+                    println("error message " + error.message)
+                }
+                )
+        )
+    }
+
+    fun deleteContact(id:String) {
+        compositeDisposable.add(
+            repository.deleteContact(id)
                 .observeOn(backgroundScheduler)
                 .subscribeOn(mainScheduler)
                 .subscribe({
@@ -91,9 +105,6 @@ class ContactViewModel(
     fun getContactMessage(): LiveData<String> {
         return messageAddContact
     }
-
-
-
 }
 
 class ViewModelMovieFactory(
