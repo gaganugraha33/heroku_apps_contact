@@ -51,15 +51,16 @@ class DetailActivity : AppCompatActivity() {
         if (contactItems != null) {
             idLoading.visibility = View.GONE
             setUI(contactItems)
-        }else{
+        } else {
             idError.visibility = View.VISIBLE
         }
     }
 
     @SuppressLint("SetTextI18n", "CheckResult")
     private fun setUI(dataContact: Data) {
-        nameUser.text = dataContact.firstName + " " + dataContact.lastName
-        ageUser.text = dataContact.age.toString()
+        nameUser.text =
+            getString(R.string.name_user) + " " + dataContact.firstName + " " + dataContact.lastName
+        ageUser.text = getString(R.string.age_user) + " " + dataContact.age.toString()
 
         val requestOption = RequestOptions()
         requestOption.placeholder(R.drawable.ic_launcher_background)

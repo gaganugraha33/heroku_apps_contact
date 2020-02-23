@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Heroku Apps</string>
-    <string name="name_user">Name user</string>
-    <string name="age_user">Age user</string>
+    <string name="name_user">Name :</string>
+    <string name="age_user">Age :</string>
     <string name="add_contact">Add Contact</string>
     <string name="image_for_content_error">image for content error</string>
     <string name="firstname_info_error">please fill field firstname</string>

@@ -46,7 +46,7 @@ class AdapterContact(
             listContact[position]?.let { it1 ->
                 (holder as Item).bindItem(
                     it1,
-                    listener, listenerContact
+                    listener, listenerContact, context
                 )
             }
         }
@@ -54,9 +54,16 @@ class AdapterContact(
 
     class Item(itemview: View) : RecyclerView.ViewHolder(itemview) {
         @SuppressLint("CheckResult", "SetTextI18n")
-        fun bindItem(dataContact: Datum, listener: (Datum) -> Unit,listenerContact: ListenerContact) {
-            itemView.nameUser.text = dataContact.firstName + " " + dataContact.lastName
-            itemView.ageUser.text = dataContact.age.toString()
+        fun bindItem(
+            dataContact: Datum,
+            listener: (Datum) -> Unit,
+            listenerContact: ListenerContact,
+            context: Context?
+        ) {
+            itemView.nameUser.text =
+                context?.getString(R.string.name_user) + " " + dataContact.firstName + " " + dataContact.lastName
+            itemView.ageUser.text =
+                context?.getString(R.string.age_user) + " " + dataContact.age.toString()
 
             val requestOption = RequestOptions()
             requestOption.placeholder(R.drawable.ic_launcher_background)
@@ -73,7 +80,7 @@ class AdapterContact(
             }
 
             itemView.delete.setOnClickListener {
-               listenerContact.listenerDelete(dataContact.id.toString())
+                listenerContact.listenerDelete(dataContact.id.toString())
             }
 
         }

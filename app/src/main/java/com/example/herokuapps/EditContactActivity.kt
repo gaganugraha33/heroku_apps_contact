@@ -97,7 +97,6 @@ class EditContactActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-            println("cekk message "+contactMessage)
             val returnIntent = Intent()
             returnIntent.putExtra("resultEdit", contactMessage)
             setResult(Activity.RESULT_OK, returnIntent)
